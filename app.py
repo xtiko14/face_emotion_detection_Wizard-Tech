@@ -25,7 +25,7 @@ detect_fn = tf.saved_model.load("Models/FaceDetector/saved_model")#Load the face
 model = tf.keras.models.load_model("Models/FEC")#Load the facial emotion classifier
 
 class_names = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'mp4'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'webm', 'avi'}
 static_files = ['display.css', 'eye.png', 'Picdetectb.jpg', 'thumbsup.jpg', 
                 'github.png', 'IU.svg', 'UI.svg', 'RT.svg', 'UV.svg', 'VU.svg', 'feedback.svg']
 
@@ -40,11 +40,11 @@ def picdelete():
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('facialRecog/home.html')
 
 @app.route('/webcam')
 def webcam():
-    return render_template('index.html')
+    return render_template('facialRecog/index.html')
 
 def allowed_file(filename):
     return ('.' in filename and
@@ -125,11 +125,11 @@ def detectpic():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             result =detectandupdate(filename)
-            return render_template('showdetect.html', orig=result[0], pred=result[1])
+            return render_template('facialRecog/showdetect.html', orig=result[0], pred=result[1])
 
 @app.route('/picdetect')
 def picdetect():
-    return render_template('picdetect.html')
+    return render_template('facialRecog/picdetect.html')
 
 @app.route('/feedback')
 def feedback():
@@ -218,11 +218,15 @@ def detectvideo():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             result =detectandupdatevideo(filename)
-            return render_template('showvideo.html', orig=result[0], pred=result[1])
+            return render_template('facialRecog/showvideo.html', orig=result[0], pred=result[1])
 
 @app.route('/video')
 def video():
-    return render_template('video.html')
+    return render_template('facialRecog/video.html')
+
+@app.route('/speech')
+def speech():
+    return render_template('speechTone/home.html')
 
 if __name__ == "__main__":
     socketio.run(app)

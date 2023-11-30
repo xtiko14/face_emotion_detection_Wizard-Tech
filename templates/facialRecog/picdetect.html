@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Picture{% endblock %}
+{% block script %}
+<script>
+  function check() {
+      var p = document.getElementById("inputGroupFile04");
+      if (p.files.length == 0) {
+          alert("Please upload image");
+          return false;
+      } else {
+          return true;
+      }
+  }
+</script>
+{% endblock script %}
+
+{% block content %}
+<div class="row align-items-center mar_card">
+  <div class="col-md-4">
+    <div class="card" style="width: 19rem;">
+      <img src="{{url_for('static',filename='UI.svg')}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Upload image</h5>
+        <p class="card-text">Results will be good if the uploaded images are representative of the training dataset(RAF-DB).</p>
+      </div>
+    </div>
+  </div>
+  <div class="col text-center">
+      <div class="card-body">
+        <form
+          action="/detectpic"
+          method="POST"
+          enctype="multipart/form-data"
+          onsubmit="return check();"
+          >
+          <input type="file" name="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" placeholder="select image from file manager" multiple accept="image/*"/>
+          <br>
+          <button class="btn btn-primary btn-xl custom-button" type="submit" value="Submit" id="inputGroupFileAddon04" onclick="changevisibility()">Upload</button>
+        </form>
+      </div>
+  </div>
+</div>
+{% endblock content %}

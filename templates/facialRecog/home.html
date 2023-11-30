@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Face{% endblock %}
+{% block content %}
+<div class="row align-items-center mar_cards">
+  <div class="col">
+    <div class="card" style="width: 19rem;">
+      <img src="{{url_for('static',filename='RT.svg')}}"  alt="..." style="width: 100%; height: 15vw; object-fit: cover;">
+      <div class="card-body">
+        <h5 class="card-title">Real-Time FED</h5>
+        <p class="card-text" style="text-align:justify">It will ask for access to webcam. After giving the permission, emotion will be detected. There will be latency due to the socketio implementation.</p>
+        <a href="{{url_for( 'webcam')}} " class="btn btn-primary btn_animation">Live Emotion</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card" style="width: 19rem;">
+      <img src="{{url_for('static',filename='IU.svg')}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">FED on Image</h5>
+        <p class="card-text" style="text-align:justify">Facial Emotion Detection is performed on the image and the image with bounding boxes will be displayed which can be downloaded.</p>
+        <a href="{{url_for( 'picdetect')}} " class="btn btn-primary">Upload Pic</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card" style="width: 19rem;">
+      <img src="{{url_for('static',filename='VU.svg')}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">FED on Video</h5>
+        <p class="card-text" style="text-align:justify">Facial Emotion Detection is performed on the frames of the video and is saved in mp4 format and is displayed which can be downloaded.</p>
+        <a href="{{url_for( 'video')}} " class="btn btn-primary">Upload Video</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
