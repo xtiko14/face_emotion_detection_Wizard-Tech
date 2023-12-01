@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, redirect
 from flask_socketio import SocketIO, send, emit
 import base64
 from PIL import Image
@@ -6,12 +6,13 @@ from io import BytesIO
 import numpy as np
 import tensorflow as tf
 import cv2
-import os
 import shutil
 from werkzeug.utils import secure_filename
 from flask import current_app
 from flask import send_file
 from getmail import send_mail
+from google.cloud import speech_v1p1beta1 as sp
+import os
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -29,10 +30,9 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'webm', 'avi'}
 static_files = ['display.css', 'eye.png', 'Picdetectb.jpg', 'thumbsup.jpg', 
                 'github.png', 'IU.svg', 'UI.svg', 'RT.svg', 'UV.svg', 'VU.svg', 'feedback.svg']
 
+### =============================== FACIAL RECOGNITION PART =========================
 @app.route('/picdelete')
 def picdelete():
-    #When this function is called all the files that are not present in the
-    #list static_files will be deleted.
     for file in os.listdir("static"):
         if file not in static_files:
             os.remove(f"static/{file}")
@@ -224,7 +224,32 @@ def detectvideo():
 def video():
     return render_template('facialRecog/video.html')
 
-@app.route('/speech')
+### =============================== SPEECH RECOGNITION PART =========================
+@app.route("/upload", methods=["POST"])
+def upload():
+    if request.method == "POST":
+        upload_file=request.files['file']
+        filename = request.files['file'].filename
+        if not os.path.exists('static/'):
+            os.mkdir('static/')
+        upload_file.save('static/' + filename)
+        with open('static/' + filename, "rb") as audio_file:
+            client = sp.SpeechClient()
+            audio = sp.RecognitionAudio(content=audio_file.read())
+            config = sp.RecognitionConfig(
+                encoding=sp.RecognitionConfig.AudioEncoding.LINEAR16,
+                sample_rate_hertz=16000,
+                language_code="en-US",
+            )
+            response = client.recognize(config=config, audio=audio)
+            script = ""
+            for result in response.results:
+                script += result.alternatives[0].transcript + " "
+        print(script)
+        return script
+    return "Failed"
+
+@app.route("/speech")
 def speech():
     return render_template('speechTone/home.html')
 

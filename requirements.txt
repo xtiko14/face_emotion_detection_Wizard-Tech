@@ -6,3 +6,4 @@ Pillow==9.1.0
 tensorflow==2.7.0
 Werkzeug==2.0.2
 eventlet
+google-cloud-speech==1.2.0

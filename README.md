@@ -1,9 +1,12 @@
 # Wizard-Tech | Emotion (Facial Emotion Detector)
-# 🙂😀😮😒😔😨
+# 🙂😀😮😒😔😨   This is `Ongoing Project`, so I suggested issues. plz tell me if you have any ideas.
+
 
 https://user-images.githubusercontent.com/96725900/164004710-2fbaaa02-fe4f-4645-b08d-d1426139ced5.mp4
 
 ![7Emotions](https://user-images.githubusercontent.com/96725900/163942354-e7befdcc-1772-4877-b271-bab3d5c9eabf.png)
+
+![Emotion-AI](static/home.png)
 
 Jump over to the Installation section using the table of contents if you don't want to know much about the project. 
 
@@ -19,6 +22,18 @@ Jump over to the Installation section using the table of contents if you don't w
       </ul>
       <ul>
         <li><a href="#Facial Emotion Classifier">Facial Emotion Classifier</a></li>
+      </ul>
+      <ul>
+        <li><a href="#Speech Transcriptor">Speech Transcriptor</a></li>
+      </ul>
+      <ul>
+        <li><a href="#Voice Tonality Classifier">Voice Tonality Classifier</a></li>
+      </ul>
+      <ul>
+        <li><a href="#Eye Gazing identifier">Eye Gazing identifier</a></li>
+      </ul>
+      <ul>
+        <li><a href="#Biological Model">Biological Model</a></li>
       </ul>
       <ul>
         <li><a href="#How it works">How it works</a></li>
@@ -39,13 +54,13 @@ Jump over to the Installation section using the table of contents if you don't w
 
 # 📝Description
 
-Facial Emotion Detection is one of the useful and toughest Machine Learning tasks because of the intra-class variation in expressions among the people. The best usecase of FED is in human-machine interaction. EmoViz is a facial emotion detection system built using TensorFlow, which takes image input and display one of the seven emotions(Neutral, Happy, Surprise, Angry, Disgust, Sad, Fear).
+Facial Emotion Detection is one of the useful and toughest Machine Learning tasks because of the intra-class variation in expressions among the people. The best usecase of FED is in human-machine interaction. Emotion-AI is a emotion(face, speech, eye gaze, brainwave) detection system  built using TensorFlow, which takes image input and display one of the seven emotions(Neutral, Happy, Surprise, Angry, Disgust, Sad, Fear).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 # 🤖About the Models
 
-The system employs two models: one for face detection and another for facial emotion classification.
+The system employs several models: one for face detection and another for facial emotion classification. Then ...
 
 ## Face Detector
 
